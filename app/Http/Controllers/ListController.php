@@ -81,11 +81,91 @@ class ListController extends Controller
 
     public function amount(Request $request)
     {
-        return 'amount';
+        $amount = (int) $request->amount;
+
+        if($amount > env('MAX_LIST_SIZE'))
+        {
+            $amount = env('MAX_LIST_SIZE');
+        }
+
+        if($amount < 1)
+        {
+            $amount = 1;
+        }
+
+        $images = Image::inRandomOrder()->take($amount)->select(['id','url'])->get();
+
+        $resImages = [];
+
+        foreach ($images as $image)
+        {
+
+            $url = env('APP_URL')."/api/v1/img/".$image->id;
+
+            $res = [
+                'id'    =>  $image->id,
+                'url'   =>  $url,
+                'html'   =>  '<img src="'.$url.'" width="400" height="400" alt="Awesome cat #'.$image->id.'" />'
+            ];
+
+            $resImages[] = $res;
+        }
+
+        return [
+            'status'    =>  'ok',
+            'data'      =>  [
+                'amount'    =>  $amount,
+                'width'     =>  400,
+                'height'    =>  400,
+                'images'    =>  $resImages
+            ]
+        ];
+
     }
 
     public function amountWithSize(Request $request)
     {
-        return 'amountWithSize';
+        $amount = (int) $request->amount;
+
+        if($amount > env('MAX_LIST_SIZE'))
+        {
+            $amount = env('MAX_LIST_SIZE');
+        }
+
+        if($amount < 1)
+        {
+            $amount = 1;
+        }
+
+        $dimensions = $this->parseDimensions($request->size);
+
+        $images = Image::inRandomOrder()->take($amount)->select(['id','url'])->get();
+
+        $resImages = [];
+
+        foreach ($images as $image)
+        {
+
+            $url = env('APP_URL')."/api/v1/img/".$image->id."/w".
+                $dimensions['width']."h".$dimensions['height'];
+
+            $res = [
+                'id'    =>  $image->id,
+                'url'   =>  $url,
+                'html'   =>  '<img src="'.$url.'" width="'.$dimensions['width'].'" height="'.$dimensions['height'].'" alt="Awesome cat #'.$image->id.'" />'
+            ];
+
+            $resImages[] = $res;
+        }
+
+        return [
+            'status'    =>  'ok',
+            'data'      =>  [
+                'amount'    =>  $amount,
+                'width'     =>  $dimensions['width'],
+                'height'    =>  $dimensions['height'],
+                'images'    =>  $resImages
+            ]
+        ];
     }
 }
