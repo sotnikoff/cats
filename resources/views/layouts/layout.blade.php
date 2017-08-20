@@ -7,7 +7,7 @@
 
   <title>{{  env('APP_NAME','cats')  }}</title>
 
-  <link rel="stylesheet" type="text/css" href="{{  asset('/css/app.css') }}" />
+  <link rel="stylesheet" type="text/css" href="{{ mix('/css/app.css') }}" />
 
 
 </head>
@@ -25,6 +25,6 @@
   </div>
 </footer>
 
-<script src="{{ asset('/js/app.js')  }}"></script>
+<script src="{{ mix('/js/app.js')  }}"></script>
 </body>
 </html>
