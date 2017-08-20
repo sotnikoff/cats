@@ -79,8 +79,10 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Catovel
                 </div>
+
+                <img src="http://cats.test.dev:8888/api/v1/img" width="400" height="400"/>
 
                 <div class="links">
                     <a href="https://laravel.com/docs">Documentation</a>

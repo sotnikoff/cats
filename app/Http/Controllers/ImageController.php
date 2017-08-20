@@ -21,9 +21,31 @@ class ImageController extends Controller
 
         $cats = Image::all();
         $number = rand(1,sizeof($cats));
-        $catUrl = $cats[$number-1]->url;
+        $url = $cats[$number-1]->url;
 
-        $cache = Cache::get("$catUrl+400+400");
+        $this->renderImage($url,400,400);
+
+    }
+
+    public function randomWithSize()
+    {
+        return 'Random with size';
+    }
+
+    public function byId(Request $request)
+    {
+        return 'By Id';
+    }
+
+    public function byIdWithSize(Request $request)
+    {
+        return 'By Id with size';
+    }
+
+
+    protected function renderImage($url,$width,$height)
+    {
+        $cache = Cache::get("$url+$width+$height");
 
         if($cache)
         {
@@ -32,21 +54,16 @@ class ImageController extends Controller
         }
         else
         {
-            $image = ImageResize::createFromString(Storage::get($catUrl));
-            $image->crop(400,400);
+            $image = ImageResize::createFromString(Storage::get($url));
+            $image->crop($width,$height);
 
             $expiresAt = Carbon::now()->addWeeks(2);
 
-            Cache::put("$catUrl+400+400", $image->getImageAsString(), $expiresAt);
+            Cache::put("$url+$width+$height", $image->getImageAsString(), $expiresAt);
 
             $image->output();
         }
-
     }
 
-    public function randomWithSize()
-    {
-
-    }
 
 }
