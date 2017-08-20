@@ -15,7 +15,7 @@
       <h3>Random pictures</h3>
       <p>You can require a random kittie.
         You may not specify size of image.
-        In this way it will be set automatically to <strong>400x400 px</strong>
+        In this way it will be set automatically to <strong>{{ env('DEFAULT_WIDTH') }}x{{ env('DEFAULT_HEIGHT') }} px</strong>
       </p>
       <p>
         <code>&lt;img src="{{ env('APP_URL') }}<wbr>/api/v1/img" alt="Awesome cat!" /&gt;</code>

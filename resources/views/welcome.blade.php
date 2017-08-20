@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <h4>Try it!</h4>
-            <p>Get any random cat with default size <strong>400 x 400 px</strong></p>
+            <p>Get any random cat with default size <strong>{{ env('DEFAULT_WIDTH') }}x{{ env('DEFAULT_HEIGHT') }} px</strong></p>
             <p>
                 <code>&lt;img src="{{ env('APP_URL') }}<wbr>/api/v1/img" alt="Awesome cat!" /&gt;</code>
             </p>
