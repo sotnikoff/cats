@@ -31,7 +31,7 @@ class ListController extends Controller
             $res = [
                 'id'    =>  $image->id,
                 'url'   =>  $url,
-                'html'   =>  '<img src="'.$url.'" width="400" height="400" alt="Awesome cat #'.$image->id.'" />'
+                'html'   =>  '<img src="'.$url.'" width="'.env('DEFAULT_WIDTH').'" height="'.env('DEFAULT_HEIGHT').'" alt="Awesome cat #'.$image->id.'" />'
             ];
 
             $resImages[] = $res;
@@ -41,8 +41,8 @@ class ListController extends Controller
             'status'    =>  'ok',
             'data'      =>  [
                 'amount'    =>  env('DEFAULT_LIST_SIZE'),
-                'width'     =>  400,
-                'height'    =>  400,
+                'width'     =>  env('DEFAULT_WIDTH'),
+                'height'    =>  env('DEFAULT_HEIGHT'),
                 'images'    =>  $resImages
             ]
         ];
@@ -132,7 +132,7 @@ class ListController extends Controller
             $res = [
                 'id'    =>  $image->id,
                 'url'   =>  $url,
-                'html'   =>  '<img src="'.$url.'" width="400" height="400" alt="Awesome cat #'.$image->id.'" />'
+                'html'   =>  '<img src="'.$url.'" width="'.env('DEFAULT_WIDTH').'" height="'.env('DEFAULT_HEIGHT').'" alt="Awesome cat #'.$image->id.'" />'
             ];
 
             $resImages[] = $res;
@@ -142,8 +142,8 @@ class ListController extends Controller
             'status'    =>  'ok',
             'data'      =>  [
                 'amount'    =>  $amount,
-                'width'     =>  400,
-                'height'    =>  400,
+                'width'     =>  env('DEFAULT_WIDTH'),
+                'height'    =>  env('DEFAULT_HEIGHT'),
                 'images'    =>  $resImages
             ]
         ];

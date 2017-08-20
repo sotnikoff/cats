@@ -27,7 +27,7 @@ class ImageController extends Controller
         $number = rand(1,sizeof($cats));
         $url = $cats[$number-1]->url;
 
-        $this->renderImage($url,400,400,'crop');
+        $this->renderImage($url,env('DEFAULT_WIDTH'),env('DEFAULT_HEIGHT'),'crop');
 
     }
 
@@ -62,7 +62,7 @@ class ImageController extends Controller
     {
         $imageUrl = Image::find($request->id)->url;
 
-        $this->renderImage($imageUrl,400,400,'crop');
+        $this->renderImage($imageUrl,env('DEFAULT_WIDTH'),env('DEFAULT_HEIGHT'),'crop');
 
     }
 
@@ -120,7 +120,7 @@ class ImageController extends Controller
 
         if($height === null and $width === null)
         {
-            $this->renderImage($url,400,400,'crop');
+            $this->renderImage($url,env('DEFAULT_WIDTH'),env('DEFAULT_HEIGHT'),'crop');
         }
     }
 
