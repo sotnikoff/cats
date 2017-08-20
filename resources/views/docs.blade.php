@@ -18,20 +18,20 @@
         In this way it will be set automatically to <strong>400x400 px</strong>
       </p>
       <p>
-        <code>&lt;img src="http://cats.test.dev:8888<wbr>/api/v1/img" alt="Awesome cat!" /&gt;</code>
+        <code>&lt;img src="http://cats.hofch.ru<wbr>/api/v1/img" alt="Awesome cat!" /&gt;</code>
       </p>
       <p>You can set manually the size of image. Use <strong>w</strong> keyword
         for setting width or <strong>h</strong> for height. Order of keyword does not matter.
       </p>
       <p>
-        <code>&lt;img src="http://cats.test.dev:8888<wbr>/api/v1/img/w200h100" alt="Awesome cat!" /&gt;</code>
+        <code>&lt;img src="http://cats.hofch.ru<wbr>/api/v1/img/w200h100" alt="Awesome cat!" /&gt;</code>
       </p>
       <p>
         You can specify size of only one dimension.
         Size of other side will be calculated automatically.
       </p>
       <p>
-        <code>&lt;img src="http://cats.test.dev:8888<wbr>/api/v1/img/w200" alt="Awesome cat!" /&gt;</code>
+        <code>&lt;img src="http://cats.hofch.ru<wbr>/api/v1/img/w200" alt="Awesome cat!" /&gt;</code>
       </p>
     </div>
   </div>
@@ -45,13 +45,13 @@
         you can add image identifier to your request
       </p>
       <p>
-        <code>&lt;img src="http://cats.test.dev:8888<wbr>/api/v1/img/2" alt="Awesome cat!" /&gt;</code>
+        <code>&lt;img src="http://cats.hofch.ru<wbr>/api/v1/img/2" alt="Awesome cat!" /&gt;</code>
       </p>
       <p>
         Or course you can add size to your request
       </p>
       <p>
-        <code>&lt;img src="http://cats.test.dev:8888<wbr>/api/v1/img/2/w200" alt="Awesome cat!" /&gt;</code>
+        <code>&lt;img src="http://cats.hofch.ru<wbr>/api/v1/img/2/w200" alt="Awesome cat!" /&gt;</code>
       </p>
     </div>
   </div>

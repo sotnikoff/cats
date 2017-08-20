@@ -26,12 +26,12 @@
             <h4>Try it!</h4>
             <p>Get any random cat with default size <strong>400 x 400 px</strong></p>
             <p>
-                <code>&lt;img src="http://cats.test.dev:8888<wbr>/api/v1/img" alt="Awesome cat!" /&gt;</code>
+                <code>&lt;img src="http://cats.hofch.ru<wbr>/api/v1/img" alt="Awesome cat!" /&gt;</code>
             </p>
             <p>Or with your desired size!</p>
 
             <p>
-                <code>&lt;img src="http://cats.test.dev:8888<wbr>/api/v1/img/w300h200" alt="Awesome cat!" /&gt;</code>
+                <code>&lt;img src="http://cats.hofch.ru<wbr>/api/v1/img/w300h200" alt="Awesome cat!" /&gt;</code>
             </p>
 
         </div>
