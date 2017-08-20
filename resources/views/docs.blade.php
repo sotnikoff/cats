@@ -15,7 +15,7 @@
       <h3>Random pictures</h3>
       <p>You can require a random kittie.
         You may not specify size of image.
-        In this way it will be set automatically to <strong>{{ env('DEFAULT_WIDTH') }}x{{ env('DEFAULT_HEIGHT') }} px</strong>
+        In this way it will be set automatically to <strong>{{ env('DEFAULT_WIDTH') }}x{{ env('DEFAULT_HEIGHT') }} px</strong>.
       </p>
       <p>
         <code>&lt;img src="{{ env('APP_URL') }}<wbr>/api/v1/img" alt="Awesome cat!" /&gt;</code>
@@ -42,7 +42,7 @@
       <p>
         If you are storing links of cats in your application and
         don't want the picture to be randomized in every requests
-        you can add image identifier to your request
+        you can add image identifier to your request.
       </p>
       <p>
         <code>&lt;img src="{{ env('APP_URL') }}<wbr>/api/v1/img/2" alt="Awesome cat!" /&gt;</code>
@@ -52,6 +52,53 @@
       </p>
       <p>
         <code>&lt;img src="{{ env('APP_URL') }}<wbr>/api/v1/img/2/w200" alt="Awesome cat!" /&gt;</code>
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <h3>Lists of pictures</h3>
+      <p>
+        Sometimes you need a list of pictures for your development purposes.
+        You can get a set of images URLs in <strong>JSON</strong> format.
+        To get images list you need to perform <code>GET request</code> like this:
+      </p>
+      <p>
+        <code>
+          {{ env('APP_URL') }}<wbr>/api/v1/list
+        </code>
+      </p>
+      <p>
+        <strong>{{ env('DEFAULT_LIST_SIZE') }}</strong> pictures will be given as default value for this call.
+      </p>
+      <p>
+        Also you can specify amount of required pictures. Try this:
+      </p>
+      <p>
+        <code>
+          {{ env('APP_URL') }}<wbr>/api/v1/list/4
+        </code>
+      </p>
+      <p>
+        You cannot require more pictures than it's set as service limit.
+        The limit is <strong>{{ env('MAX_LIST_SIZE') }}</strong>
+      </p>
+      <p>
+        You can add image size that will be applied to all required. Try this request:
+      </p>
+      <p>
+        <code>
+          {{ env('APP_URL') }}<wbr>/api/v1/list/w500h200
+        </code>
+      </p>
+      <p>
+        Or this with amount:
+      </p>
+      <p>
+        <code>
+          {{ env('APP_URL') }}<wbr>/api/v1/list/4/w500h200
+        </code>
       </p>
     </div>
   </div>
