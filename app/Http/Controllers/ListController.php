@@ -10,6 +10,13 @@ class ListController extends Controller
 {
     use Utility;
 
+    /**
+     * Данный метод возвращает ссылки на изображения в формате JSON
+     * Количество изображений определяется исходя из настроек окружения .env
+     *
+     * @return array
+     */
+
     public function random()
     {
         $images = Image::inRandomOrder()->take(env('DEFAULT_LIST_SIZE'))->select(['id','url'])->get();
@@ -41,6 +48,15 @@ class ListController extends Controller
         ];
         
     }
+
+    /**
+     * Данный метод возвращает ссылки на изображения в формате JSON
+     * Пользователь может указать желаемый размер изображений
+     * Количество изображение определяется исходя из настроек окружения .env
+     *
+     * @param Request $request
+     * @return array
+     */
 
     public function randomWithSize(Request $request)
     {
@@ -78,6 +94,17 @@ class ListController extends Controller
 
 
     }
+
+
+    /**
+     * Данный метод возвращает ссылки на изображения в формате JSON
+     * Пользователь может указать желаемое количество изображений
+     * Количество изображений не может превышать указанных в настройках окружения .env значений
+     * Размер изображений определяется по умолчанию
+     *
+     * @param Request $request
+     * @return array
+     */
 
     public function amount(Request $request)
     {
@@ -122,6 +149,15 @@ class ListController extends Controller
         ];
 
     }
+
+    /**
+     * Данный метод возвращает ссылки на изображения в формате JSON
+     * Пользователь может указать желаемое количество изображений
+     * Пользователь может указать желаемый размер изображений
+     *
+     * @param Request $request
+     * @return array
+     */
 
     public function amountWithSize(Request $request)
     {
