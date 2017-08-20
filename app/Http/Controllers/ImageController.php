@@ -8,10 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Eventviva\ImageResize;
+use App\Helpers\Utility;
 
 class ImageController extends Controller
 {
-
+    use Utility;
     /**
      * Данный метод обрабатывает запросы на случайное изображение
      * Размеры изображения определяются по умолчанию 400 х 400 пикселей
@@ -171,32 +172,5 @@ class ImageController extends Controller
         }
     }
 
-    /**
-     * Данный метод на основе регулярных выражений из строки вычисляет ширину и высоту
-     *
-     * @param string $size
-     * @return array
-     */
-
-    protected function parseDimensions($size)
-    {
-        $width = null;
-        $height = null;
-
-        preg_match('/w(\d+)/',$size,$widthMatches);
-
-        if(array_key_exists(1,$widthMatches)){
-            $width = (int) $widthMatches[1];
-        }
-
-        preg_match('/h(\d+)/',$size,$heightMatches);
-
-        if(array_key_exists(1,$heightMatches)){
-            $height = (int) $heightMatches[1];
-        }
-
-        return ['width'=>$width,'height'=>$height];
-
-    }
 
 }

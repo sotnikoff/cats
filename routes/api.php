@@ -28,8 +28,15 @@ Route::prefix('v1')->group(function(){
     //Images by Ids
 
     Route::get('/img/{id}','ImageController@byId')->where('id','\d+');
-    Route::get('/img/{id}/{size}','ImageController@byIdWithSize')->where(['id'=>'\d+','byIdWithSize'=>'w\d+|h\d+|w\d+h\d+|h\d+w\d+']);
+    Route::get('/img/{id}/{size}','ImageController@byIdWithSize')->where(['id'=>'\d+','size'=>'w\d+|h\d+|w\d+h\d+|h\d+w\d+']);
 
 
+    //Lists of images
+
+    Route::get('/list','ListController@random');
+    Route::get('/list/{size}','ListController@randomWithSize')->where('size','w\d+|h\d+|w\d+h\d+|h\d+w\d+');
+
+    Route::get('/list/{amount}','ListController@amount')->where('amount','\d+');
+    Route::get('/list/{amount}/{size}','ListController@amountWithSize')->where(['amount'=>'\d+','size'=>'w\d+|h\d+|w\d+h\d+|h\d+w\d+']);
 
 });
