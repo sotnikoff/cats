@@ -13,6 +13,9 @@ class ImageController extends Controller
 {
 
     /**
+     * Данный метод обрабатывает запросы на случайное изображение
+     * Размеры изображения определяются по умолчанию 400 х 400 пикселей
+     *
      * @return void
      */
 
@@ -23,27 +26,117 @@ class ImageController extends Controller
         $number = rand(1,sizeof($cats));
         $url = $cats[$number-1]->url;
 
-        $this->renderImage($url,400,400);
+        $this->renderImage($url,400,400,'crop');
 
     }
 
-    public function randomWithSize()
+    /**
+     * Данный метод обрабатывает запросы на случайное изображение с указанными размерами
+     *
+     * @param Request $request
+     * @return void
+     */
+
+    public function randomWithSize(Request $request)
     {
-        return 'Random with size';
+        $cats = Image::all();
+        $number = rand(1,sizeof($cats));
+        $url = $cats[$number-1]->url;
+
+        $dimensions = $this->parseDimensions($request->size);
+
+        $this->processSizing($dimensions,$url);
+
     }
+
+    /**
+     * Данный метод обрабатывает запросы на изображение по ИД
+     * Размеры изображения определяются по умолчанию 400 х 400 пикселей
+     *
+     * @param Request $request
+     * @return void
+     */
 
     public function byId(Request $request)
     {
-        return 'By Id';
+        $imageUrl = Image::find($request->id)->url;
+
+        $this->renderImage($imageUrl,400,400,'crop');
+
     }
 
     public function byIdWithSize(Request $request)
     {
-        return 'By Id with size';
+        $imageUrl = Image::find($request->id)->url;
+
+        $dimensions = $this->parseDimensions($request->size);
+
+        $this->processSizing($dimensions,$imageUrl);
+
     }
 
 
-    protected function renderImage($url,$width,$height)
+    /**
+     * Данный метод принимает на вход размеры и адрес картинки
+     * Происходит проверка наличия ширины или высоты
+     * В зависимости от наличия ширины и высоты выбирается необходимый метод для работы с изображением
+     * Результатом вычислений является вызов метода processSizing
+     *
+     * @param array $dimensions
+     * @param string $url
+     * @return void
+     */
+
+    protected function processSizing($dimensions,$url)
+    {
+        $width = null;
+        $height = null;
+
+        if($dimensions['width'] >= 25 and $dimensions['width'] <= 1000)
+        {
+            $width = $dimensions['width'];
+        }
+
+        if($dimensions['height'] >= 25 and $dimensions['height'] <= 1000)
+        {
+            $height = $dimensions['height'];
+        }
+
+        if($height === null and $width !== null)
+        {
+            $this->renderImage($url,$width,null,'resizeToWidth');
+        }
+
+        if($width === null and $height !== null)
+        {
+            $this->renderImage($url,null,$height,'resizeToHeight');
+        }
+
+        if($height !== null and $width !== null)
+        {
+            $this->renderImage($url,$width,$height,'crop');
+        }
+
+        if($height === null and $width === null)
+        {
+            $this->renderImage($url,400,400,'crop');
+        }
+    }
+
+
+    /**
+     * Данный метод выполняет всю обработку изображения
+     * В данном методе реализована работа с кэшем
+     * Результатом выполнения метода явяется вывод изображения пользователю
+     *
+     * @param string $url
+     * @param integer $width
+     * @param integer $height
+     * @param string $action
+     * @return void
+     */
+
+    protected function renderImage($url,$width = null,$height = null,$action = 'crop')
     {
         $cache = Cache::get("$url+$width+$height");
 
@@ -55,7 +148,20 @@ class ImageController extends Controller
         else
         {
             $image = ImageResize::createFromString(Storage::get($url));
-            $image->crop($width,$height);
+
+            if($action === 'crop')
+            {
+                $image->crop($width,$height);
+            }
+            else if ($action === 'resizeToHeight')
+            {
+                $image->resizeToHeight($height);
+            }
+            else if ($action === 'resizeToWidth')
+            {
+                $image->resizeToWidth($width);
+            }
+
 
             $expiresAt = Carbon::now()->addWeeks(2);
 
@@ -65,5 +171,32 @@ class ImageController extends Controller
         }
     }
 
+    /**
+     * Данный метод на основе регулярных выражений из строки вычисляет ширину и высоту
+     *
+     * @param string $size
+     * @return array
+     */
+
+    protected function parseDimensions($size)
+    {
+        $width = null;
+        $height = null;
+
+        preg_match('/w(\d+)/',$size,$widthMatches);
+
+        if(array_key_exists(1,$widthMatches)){
+            $width = (int) $widthMatches[1];
+        }
+
+        preg_match('/h(\d+)/',$size,$heightMatches);
+
+        if(array_key_exists(1,$heightMatches)){
+            $height = (int) $heightMatches[1];
+        }
+
+        return ['width'=>$width,'height'=>$height];
+
+    }
 
 }
