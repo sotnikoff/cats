@@ -4,7 +4,7 @@
         <div class="col-md-12">
             <div class="jumbotron" id="page_header">
                 <h1>Random pics of cats</h1>
-                <p>Sweet API for developers and designers to get cat pictures of desired sizes</p>
+                <h2>Sweet API for developers and designers to get random cat pictures of desired sizes</h2>
                 <p><a class="btn btn-primary btn-lg" href="{{ route('docs')  }}" role="button">Read docs</a></p>
             </div>
         </div>
@@ -12,10 +12,16 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <h4>Hi there!</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-1">
+            <img src="{{ asset('/images/cat-thumb.jpg') }}" alt="" class="img-responsive center-block">
+        </div>
+        <div class="col-md-8">
             <p>
                 Feel free to get a random cat picture! Just use our API to get image links.
             </p>
-
         </div>
     </div>
     <div class="row">
