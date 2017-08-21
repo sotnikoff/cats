@@ -16,19 +16,20 @@ class ImageController extends Controller
     use Utility;
     /**
      * Данный метод обрабатывает запросы на случайное изображение
-     * Размеры изображения определяются по умолчанию 400 х 400 пикселей
+     * Размеры изображения определяются по умолчанию
      *
+     * @param Request $request
      * @return void
      */
 
-    public function random()
+    public function random(Request $request)
     {
 
         $cats = Image::all();
         $number = rand(1,sizeof($cats));
         $url = $cats[$number-1]->url;
 
-        $this->renderImage($url,env('DEFAULT_WIDTH'),env('DEFAULT_HEIGHT'),'crop');
+        $this->renderImage($url,env('DEFAULT_WIDTH'),env('DEFAULT_HEIGHT'),'crop',$request->ip());
 
     }
 
@@ -47,13 +48,13 @@ class ImageController extends Controller
 
         $dimensions = $this->parseDimensions($request->size);
 
-        $this->processSizing($dimensions,$url);
+        $this->processSizing($dimensions,$url,$request->ip());
 
     }
 
     /**
      * Данный метод обрабатывает запросы на изображение по ИД
-     * Размеры изображения определяются по умолчанию 400 х 400 пикселей
+     * Размеры изображения определяются по умолчанию
      *
      * @param Request $request
      * @return void
@@ -61,19 +62,27 @@ class ImageController extends Controller
 
     public function byId(Request $request)
     {
-        $imageUrl = Image::find($request->id)->url;
+        $imageUrl = Image::findOrFail($request->id)->url;
 
-        $this->renderImage($imageUrl,env('DEFAULT_WIDTH'),env('DEFAULT_HEIGHT'),'crop');
+        $this->renderImage($imageUrl,env('DEFAULT_WIDTH'),env('DEFAULT_HEIGHT'),'crop',$request->ip());
 
     }
 
+    /**
+     * Данный метод обрабатывает запросы на изображение по ИД
+     * Данный метод обрабатывает запросы на случайное изображение с указанными размерами
+     *
+     * @param Request $request
+     */
+
+
     public function byIdWithSize(Request $request)
     {
-        $imageUrl = Image::find($request->id)->url;
+        $imageUrl = Image::findOrFail($request->id)->url;
 
         $dimensions = $this->parseDimensions($request->size);
 
-        $this->processSizing($dimensions,$imageUrl);
+        $this->processSizing($dimensions,$imageUrl,$request->ip());
 
     }
 
@@ -82,14 +91,15 @@ class ImageController extends Controller
      * Данный метод принимает на вход размеры и адрес картинки
      * Происходит проверка наличия ширины или высоты
      * В зависимости от наличия ширины и высоты выбирается необходимый метод для работы с изображением
-     * Результатом вычислений является вызов метода processSizing
+     * Результатом вычислений является вызов метода renderImage
      *
      * @param array $dimensions
      * @param string $url
+     * @param string $ip
      * @return void
      */
 
-    protected function processSizing($dimensions,$url)
+    protected function processSizing($dimensions,$url,$ip)
     {
         $width = null;
         $height = null;
@@ -106,22 +116,22 @@ class ImageController extends Controller
 
         if($height === null and $width !== null)
         {
-            $this->renderImage($url,$width,null,'resizeToWidth');
+            $this->renderImage($url,$width,null,'resizeToWidth',$ip);
         }
 
         if($width === null and $height !== null)
         {
-            $this->renderImage($url,null,$height,'resizeToHeight');
+            $this->renderImage($url,null,$height,'resizeToHeight',$ip);
         }
 
         if($height !== null and $width !== null)
         {
-            $this->renderImage($url,$width,$height,'crop');
+            $this->renderImage($url,$width,$height,'crop',$ip);
         }
 
         if($height === null and $width === null)
         {
-            $this->renderImage($url,env('DEFAULT_WIDTH'),env('DEFAULT_HEIGHT'),'crop');
+            $this->renderImage($url,env('DEFAULT_WIDTH'),env('DEFAULT_HEIGHT'),'crop',$ip);
         }
     }
 
@@ -135,10 +145,11 @@ class ImageController extends Controller
      * @param integer $width
      * @param integer $height
      * @param string $action
+     * @param string $ip
      * @return void
      */
 
-    protected function renderImage($url,$width = null,$height = null,$action = 'crop')
+    protected function renderImage($url,$width = null,$height = null,$action = 'crop',$ip = "0.0.0.0")
     {
         $cache = Cache::get("$url+$width+$height");
 
@@ -146,7 +157,7 @@ class ImageController extends Controller
         {
             $image = ImageResize::createFromString($cache);
 
-            Log::info("Cat required from cache - $url+$width+$height");
+            Log::info("$ip required cat from cache - $url+$width+$height");
 
             $image->output();
         }
@@ -172,7 +183,17 @@ class ImageController extends Controller
 
             Cache::put("$url+$width+$height", $image->getImageAsString(), $expiresAt);
 
-            Log::info("Put in cache new pic of cat. URL: $url Width: $width Height: $height");
+            if(!$width)
+            {
+                $width = "auto";
+            }
+
+            if(!$height)
+            {
+                $height = "auto";
+            }
+
+            Log::info("$ip put in cache new pic of cat. URL: $url Width: $width Height: $height");
 
             $image->output();
         }
