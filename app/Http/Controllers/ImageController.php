@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Eventviva\ImageResize;
 use App\Helpers\Utility;
+use Illuminate\Support\Facades\Log;
 
 class ImageController extends Controller
 {
@@ -144,6 +145,9 @@ class ImageController extends Controller
         if($cache)
         {
             $image = ImageResize::createFromString($cache);
+
+            Log::info("Cat required from cache - $url+$width+$height");
+
             $image->output();
         }
         else
@@ -167,6 +171,8 @@ class ImageController extends Controller
             $expiresAt = Carbon::now()->addWeeks(2);
 
             Cache::put("$url+$width+$height", $image->getImageAsString(), $expiresAt);
+
+            Log::info("Put in cache new pic of cat. URL: $url Width: $width Height: $height");
 
             $image->output();
         }
