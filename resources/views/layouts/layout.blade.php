@@ -7,12 +7,12 @@
   <meta name="title" content="{{ env('APP_NAME') }}">
   <meta name="keywords" content="API cat pictures random cats size JSON REST">
   <meta name="description" content="Sweet API for developers and designers to get random cat pictures of desired sizes">
-  
-  <meta property="og:site_name" content="{{ env('APP_NAME') }}"/>
-  <meta property="og:title" content="Sweet API for developers and designers to get random cat pictures of desired sizes" >
-  <meta property="og:description" content="Use kitties for your application development. We provide images up to 1000px width and height" >
+
+  <meta property="og:site_name" content="{{ env('APP_NAME') }}">
+  <meta property="og:title" content="Sweet API for developers and designers to get random cat pictures of desired sizes">
+  <meta property="og:description" content="Use kitties for your application development. We provide images up to 1000px width and height">
   <meta property="og:image" content="{{ env('APP_URL') }}/images/cat-thumb.jpg">
-  <meta property="og:url" content="{{ env('APP_URL') }}" >
+  <meta property="og:url" content="{{ env('APP_URL') }}">
   <meta property="og:type" content="service" >
 
   <title>{{  env('APP_NAME')  }}</title>
