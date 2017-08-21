@@ -2,11 +2,11 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="jumbotron" id="page_header">
+            <header class="jumbotron" id="page_header">
                 <h1>Random pics of cats</h1>
-                <h2>Sweet API for developers and designers to get random cat pictures of desired sizes</h2>
+                <p>Sweet API for developers and designers to get random cat pictures of desired sizes</p>
                 <p><a class="btn btn-primary btn-lg" href="{{ route('docs')  }}" role="button">Read docs</a></p>
-            </div>
+            </header>
         </div>
     </div>
     <div class="row">
@@ -15,10 +15,16 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-2 col-md-offset-1">
-            <img src="{{ asset('/images/cat-thumb.jpg') }}" alt="" class="img-responsive center-block">
+        <div class="col-md-2 col-md-offset-1 col-sm-4  col-xs-12">
+            <img src="{{ asset('/images/cat-thumb.jpg') }}" alt="" class="img-rounded img-responsive center-block">
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <h2 class="site-h2">
+                Use kitties for your application development.
+            </h2>
+            <p>
+                We provide images up to 1000px width and height.
+            </p>
             <p>
                 Feel free to get a random cat picture! Just use our API to get image links.
             </p>
