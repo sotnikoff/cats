@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Image;
+use Illuminate\Support\Facades\Storage;
 
 class ImagesSeeder extends Seeder
 {
@@ -12,20 +13,12 @@ class ImagesSeeder extends Seeder
      */
     public function run()
     {
-        $images = [
-          'cats/cat-00001.jpg',
-          'cats/cat-00002.jpg',
-          'cats/cat-00003.jpg',
-          'cats/cat-00004.jpg',
-          'cats/cat-00005.jpg',
-          'cats/cat-00006.jpg',
-          'cats/cat-00007.jpg',
-          'cats/cat-00008.jpg',
-        ];
 
-        foreach ($images as $image)
+        $files = Storage::files('cats');
+
+        foreach ($files as $file)
         {
-            Image::create(['url'=>$image]);
+            Image::create(['url'=>$file]);
         }
 
 
