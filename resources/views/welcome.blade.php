@@ -13,10 +13,7 @@
         <div class="col-md-10 col-md-offset-1">
             <h4>Hi there!</h4>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Aliquam et ex non quam reprehenderit rerum sed temporibus!
-                Atque et eum excepturi exercitationem,
-                facere itaque necessitatibus nobis non quae suscipit tenetur.
+                Feel free to get a random cat picture! Just use our API to get image links.
             </p>
 
         </div>
@@ -42,4 +39,5 @@
             <p>Learn about all available features in our <a href="{{ route('docs')  }}">documentation</a></p>
         </div>
     </div>
+
 @endsection

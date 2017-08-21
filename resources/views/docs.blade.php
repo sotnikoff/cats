@@ -21,7 +21,7 @@
         <code>&lt;img src="{{ env('APP_URL') }}<wbr>/api/v1/img" alt="Awesome cat!" /&gt;</code>
       </p>
       <p>You can set manually the size of image. Use <strong>w</strong> keyword
-        for setting width or <strong>h</strong> for height. Order of keyword does not matter.
+        for setting width or <strong>h</strong> for height. Order of keywords does not matter.
       </p>
       <p>
         <code>&lt;img src="{{ env('APP_URL') }}<wbr>/api/v1/img/w200h100" alt="Awesome cat!" /&gt;</code>
@@ -40,7 +40,7 @@
     <div class="col-md-10 col-md-offset-1">
       <h3>Pictures by identifiers</h3>
       <p>
-        If you are storing links of cats in your application and
+        If you are storing links of cats in your applications and
         don't want the picture to be randomized in every requests
         you can add image identifier to your request.
       </p>
@@ -48,7 +48,7 @@
         <code>&lt;img src="{{ env('APP_URL') }}<wbr>/api/v1/img/2" alt="Awesome cat!" /&gt;</code>
       </p>
       <p>
-        Or course you can add size to your request
+        Or course you can add image size to your request
       </p>
       <p>
         <code>&lt;img src="{{ env('APP_URL') }}<wbr>/api/v1/img/2/w200" alt="Awesome cat!" /&gt;</code>
@@ -60,9 +60,9 @@
     <div class="col-md-10 col-md-offset-1">
       <h3>Lists of pictures</h3>
       <p>
-        Sometimes you need a list of pictures for your development purposes.
-        You can get a set of images URLs in <strong>JSON</strong> format.
-        To get images list you need to perform <code>GET request</code> like this:
+        Sometimes you may need a list of pictures for your development purposes.
+        You can get a set of images in <strong>JSON</strong> format.
+        To get images list you have to perform a <code>GET request</code> like this:
       </p>
       <p>
         <code>
@@ -85,7 +85,7 @@
         The limit is <strong>{{ env('MAX_LIST_SIZE') }}</strong>
       </p>
       <p>
-        You can add image size that will be applied to all required. Try this request:
+        You can add image size that will be applied to all required images. Try this request:
       </p>
       <p>
         <code>
