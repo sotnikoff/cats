@@ -8,6 +8,7 @@
   <meta name="keywords" content="API cat pictures random cats size JSON REST">
   <meta name="description" content="Sweet API for developers and designers to get random cat pictures of desired sizes">
 
+  <meta name="google-site-verification" content="HNUf9lT0kk7_bI49cpxyVhKL8WQOzbby2FORY4iKkMw" />
 
   <meta property="og:site_name" content="RandomCat"/>
   <meta property="og:title" content="Sweet API for developers and designers to get random cat pictures of desired sizes"/>
