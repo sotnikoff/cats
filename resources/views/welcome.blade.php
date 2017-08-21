@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-12">
             <header class="jumbotron" id="page_header">
-                <h1>Random pics of cats</h1>
+                <h1>Random Cat</h1>
                 <p>Sweet API for developers and designers to get random cat pictures of desired sizes</p>
                 <p><a class="btn btn-primary btn-lg" href="{{ route('docs')  }}" role="button">Read docs</a></p>
             </header>
