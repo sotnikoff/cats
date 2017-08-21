@@ -16,7 +16,7 @@
     </div>
     <div class="row">
         <div class="col-md-2 col-md-offset-1 col-sm-4  col-xs-12">
-            <img src="{{ asset('/images/cat-thumb.jpg') }}" alt="" class="img-rounded img-responsive center-block">
+            <img src="{{ asset('/images/cat-thumb.jpg') }}" alt="Random cat" class="img-rounded img-responsive center-block">
         </div>
         <div class="col-md-8 col-sm-8 col-xs-12">
             <h2 class="site-h2">
