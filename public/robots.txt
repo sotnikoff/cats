@@ -1,2 +1,3 @@
+Host: randomcat.online
 User-agent: *
 Disallow:
